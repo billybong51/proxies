@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proxy Hub Dashboard</title>
+    <title>Clever | Log in</title>
+    
+    <link rel="icon" type="image/png" href="https://thegamewebsite.github.io/logo.png?v=12">
+
     <style>
         /* --- Global Setup --- */
         html, body {
@@ -26,18 +29,51 @@
             background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
         }
 
-        .main-header {
-            font-size: 64px;
-            font-weight: 900;
-            letter-spacing: 10px;
+        /* --- Top Header Area --- */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
             margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .main-header {
+            font-size: 54px;
+            font-weight: 900;
+            letter-spacing: 8px;
             text-transform: uppercase;
             text-align: center;
             background: linear-gradient(#fff, #555);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+            margin: 0;
         }
+
+        /* --- UV Static (Moved to Top) --- */
+        .uv-top-box {
+            background: rgba(88, 28, 135, 0.2);
+            border: 1px solid #7c3aed;
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .uv-btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        .uv-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
 
         /* --- Horizontal Columns --- */
         .dashboard-grid {
@@ -74,24 +110,6 @@
 
         /* --- Column Specific Styles --- */
 
-        /* UV Static Column */
-        .uv-col {
-            background: rgba(88, 28, 135, 0.2);
-            border: 1px solid #7c3aed;
-        }
-        .uv-btn {
-            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
-            color: #fff;
-            border: none;
-            padding: 14px;
-            font-weight: 800;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
-            transition: 0.3s;
-        }
-        .uv-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
-
         /* Left: Rammerhead */
         .rammerhead-col {
             background: rgba(40, 40, 40, 0.5);
@@ -106,6 +124,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: 0.2s;
+            text-transform: uppercase;
         }
         .rammerhead-btn:hover { background-color: #555; }
 
@@ -124,6 +143,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
         }
         .utopia-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
 
@@ -141,28 +161,26 @@
             border-radius: 12px;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
         }
         .doge-btn:hover { background-color: #5e4218; color: #fff; }
 
-        button {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 13px;
-        }
     </style>
 </head>
 <body>
 
     <div class="master-wrapper">
-        <h1 class="main-header">PROXY LINKS</h1>
+        <div class="header-container">
+            <h1 class="main-header">PROXY LINKS</h1>
+            
+            <div class="uv-top-box">
+                <h2 style="color: #a78bfa; margin-bottom: 10px; font-size: 16px;">Ultraviolet</h2>
+                <button class="uv-btn" onclick="launch('UV Static', 'https://uvv2.rhw.one/active/')">UV Static</button>
+            </div>
+        </div>
 
         <div class="dashboard-grid">
             
-            <div class="column uv-col">
-                <h2 style="color: #a78bfa;">Ultraviolet</h2>
-                <button class="uv-btn" onclick="launch('UV Static', 'https://uvv2.rhw.one/active/')">UV Static</button>
-            </div>
-
             <div class="column rammerhead-col">
                 <h2>Rammerhead</h2>
                 <button class="rammerhead-btn" onclick="launch('Method 1', 'https://shorturl.at/xYJ2i')">Method 1</button>
@@ -198,24 +216,25 @@
         function launch(name, url) {
             const newTab = window.open('about:blank', '_blank');
             if (!newTab) {
-                alert('Popup blocked! Please allow popups to open the link.');
+                alert('Popup blocked! Please allow popups.');
                 return;
             }
 
             const content = `
-<!DOCTYPE html>
-<html>
-<head>
-    <title>${name}</title>
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #fff; }
-        iframe { border: none; width: 100%; height: 100%; }
-    </style>
-</head>
-<body>
-    <iframe src="${url}"></iframe>
-</body>
-</html>`;
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Clever | Log in</title>
+                    <link rel="icon" type="image/png" href="https://thegamewebsite.github.io/logo.png">
+                    <style>
+                        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; }
+                        iframe { border: none; width: 100%; height: 100%; }
+                    </style>
+                </head>
+                <body>
+                    <iframe src="${url}"></iframe>
+                </body>
+                </html>`;
 
             newTab.document.open();
             newTab.document.write(content);
